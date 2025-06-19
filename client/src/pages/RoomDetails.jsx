@@ -4,6 +4,8 @@ import { roomsDummyData } from '../assets/assets'
 import StarRating from '../components/StarRating'
 import { assets } from '../assets/assets'
 import { facilityIcons } from '../assets/assets'
+import { roomCommonData } from '../assets/assets'
+
 
 const RoomDetails = () => {
 
