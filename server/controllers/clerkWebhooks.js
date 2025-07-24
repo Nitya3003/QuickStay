@@ -20,10 +20,10 @@ const clerkWebhooks = async (req, res) => {
     const { type, data } = req.body;
 
     const userData = {
-  _id: data.id,
-  email: data.email_addresses[0].email_address,
-  username: data.first_name + " " + data.last_name,
-  image: data.image_url,
+    _id: data.id,
+    email: data.email_addresses[0].email_address,
+    username: data.first_name + " " + data.last_name,
+    image: data.image_url,
 }
 
 // Switch Cases for different Events
@@ -45,9 +45,7 @@ switch (type) {
     console.log("Unhandled event type:", type);
     break;}
 }
-    res.json({success: true, message: "Webhook processed successfully"});
-
-    
+    res.json({success: true, message: "Webhook processed successfully"});    
   } catch (error) {
     // error handling logic here (not visible in image)
     console.error(error.message);
