@@ -1,14 +1,16 @@
 import mongoose from "mongoose";
 
-// This code defines a Mongoose schema for a User model in a hotel booking application.
-
-const userSchema = mongoose.Schema({
-  _id: { type: String, required: true },
+const userSchema = new mongoose.Schema({
+  _id: { type: String, required: true }, // Clerk user ID
   username: { type: String, required: true },
   email: { type: String, required: true },
   image: { type: String, required: true },
-  role: { type: String, enum: ["user", "hotelOwner"], default: "user" },
-  recentSearchedCities: [{ type: String, required: true }],
+  role: {
+    type: String,
+    enum: ["user", "hotelOwner"],
+    default: "user"
+  },
+  recentSearchedCities:  [{ type: String, required: true }],
 }, { timestamps: true });
 
 const User = mongoose.model("User", userSchema);
