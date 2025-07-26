@@ -30,7 +30,7 @@ app.post(
 app.use(express.json());
 
 // Health check
-app.get("/", (req, res) => {
+app.get("/", (req, res) => {  
   res.send("API is working");
 });
 
