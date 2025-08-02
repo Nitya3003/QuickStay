@@ -4,7 +4,7 @@ import cors from "cors";
 import connectDB from "./configs/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import clerkWebhooks from "./controllers/clerkWebhooks.js";
-import User from "./models/User.js";
+import User from "./models/user.js";
 
 // Initialize Express app
 const app = express();
