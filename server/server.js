@@ -4,37 +4,44 @@ import cors from "cors";
 import connectDB from "./configs/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import clerkWebhooks from "./controllers/clerkWebhooks.js";
-import User from "./models/User.js";
+import userRouter from "./routes/userRoutes.js";
+import hotelRouter from "./routes/hotelRoutes.js";
+import connectCloudinary from "./configs/cloudinary.js";
+import roomRouter from "./routes/roomROutes.js";
+import bookingRouter from "./routes/bookingRoutes.js";
 
-// Initialize Express app
 const app = express();
 
-// Connect to DB
 connectDB().catch(err => {
   console.error("Database connection error:", err);
   process.exit(1);
 });
 
-// Use CORS and Clerk middleware before routes
+connectCloudinary().catch(err => {
+  console.error("Cloudinary connection error:", err);
+  process.exit(1);
+});
+
 app.use(cors());
 app.use(clerkMiddleware());
 
-// ✅ Handle Clerk webhook BEFORE express.json
 app.post(
   "/api/clerk",
-  express.raw({ type: "application/json" }), // Important: raw body needed for verification
+  express.raw({ type: "application/json" }), 
   clerkWebhooks
 );
 
-// ✅ All other routes can use JSON parsing
 app.use(express.json());
 
-// Health check
 app.get("/", (req, res) => {  
   res.send("API is working");
 });
 
 // Optional: Add any other routes here
+app.use('/api/user', userRouter);
+app.use('/api/hotel', hotelRouter);
+app.use('/api/rooms', roomRouter);
+app.use('/api/bookings', bookingRouter);
 
 // Global error handler
 app.use((err, req, res, next) => {
@@ -42,7 +49,6 @@ app.use((err, req, res, next) => {
   res.status(500).send("Server Error");
 });
 
-// ✅ Export the handler for Vercel
 export default app;
 
 // ✅ Only run the server locally (i.e., not on Vercel)
