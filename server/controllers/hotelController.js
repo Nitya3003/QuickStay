@@ -4,7 +4,14 @@ import User from "../models/User.js";
 export const registerHotel = async (req, res) => {
     try {
         const {name, address, contact, city} = req.body;
-        const owner = req.user_id;
+        const owner = req.auth.userId;
+
+        if(!owner){
+        return res.status(401).json({
+        success: false,
+        message: "Authentication required"
+        });
+    }
 
         // Check if User Already Registered
         const hotel = await Hotel.findOne({owner});

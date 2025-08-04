@@ -34,7 +34,7 @@ const fetchUser = async ()=>{
             },5000)
         }
     } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.log("Error fetching user data:", error);
         toast.error(error.message || "Failed to fetch user data");
     }
 }
