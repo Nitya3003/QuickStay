@@ -33,19 +33,20 @@ export const createRoom = async (req, res) => {
 }
 
 // API to get all rooms
-const getRooms = await Room.find({ isAvailable: true }).populate({
-  path: 'hotel',
-  populate: {
-    path: 'owner',
-    select: 'image'
-  }
-}).sort({ createdAt: -1 });
-
-// Remove rooms that don’t have hotel or hotel.owner
-const rooms = getRooms.filter(
-  room => room.hotel && room.hotel.owner
-);
-
+export const getRooms = async (req, res) => { 
+    try {
+        const rooms = await Room.find({isAvailable: true}).populate({
+            path: 'hotel',
+            populate: {
+                path: 'owner',
+                select: 'image'
+            }
+        }).sort({ createdAt: -1 });
+        res.json({success: true, rooms});
+    } catch (error) {
+        res.json({success: false, message: error.message});
+    }
+};
 
 // API to get all rooms for a specific hotel
 export const getOwnerRooms = async (req, res) => {

@@ -205,33 +205,27 @@ const onSubmitHandler = async (e) => {
 </div>
 
     {/* Hosted by */}
-    {room.hotel?.owner ? (
     <div className='flex flex-col items-start gap-4'>
-        <div className='flex gap-4'>
-        <img
-            src={room.hotel.owner.image || assets.defaultUserImage}
-            alt="Host"
-            className='h-14 w-14 md:h-18 md:w-18 rounded-full'
-        />
+    <div className='flex gap-4'>
+    <img src={room.hotel.owner?.image || assets.defaultUserImage} alt="Host" className='h-14 w-14 md:h-18 md:w-18 rounded-full' />
         <div>
-            <p className='text-lg md:text-xl'>
+        <p className='text-lg md:text-xl'>
             Hosted by {room.hotel.name}
-            </p>
-            <div className='flex items-center mt-1'>
+        </p>
+        <div className='flex items-center mt-1'>
             <StarRating />
             <p className='ml-2'>200+ reviews</p>
-            </div>
         </div>
         </div>
-
-        <button className='px-6 py-2.5 mt-4 rounded text-white bg-primary hover:bg-primary-dull transition-all cursor-pointer'>
-        Contact Now
-        </button>
     </div>
-    ) : (
-    <div className='mt-10 text-gray-500 italic'>Host info not available</div>
-    )}
-</div>
+
+    <button className='px-6 py-2.5 mt-4 rounded text-white bg-primary hover:bg-primary-dull transition-all cursor-pointer'>
+        Contact Now
+    </button>
+    </div>
+
+    </div>
     )
 }
+
 export default RoomDetails
