@@ -1,9 +1,9 @@
 import React, { useState,useEffect} from 'react'
 import Title from '../../components/Title'
 import { assets } from '../../assets/assets'
-import { useAppContext } from '../../context/appContext.jsx'
+import { useAppContext } from '../../context/AppContext.jsx'
 
-const Dashboard = () => {
+const Dashboard = () => { 
 
   const{currency, user, getToken, toast, axios} = useAppContext()
 
