@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { cities } from '../assets/assets'
-import { useAppContext } from '../context/AppContext.jsx'
+import { useAppContext } from '../Context/AppContext.jsx'
 import {assets} from '../assets/assets.js'
 
 
