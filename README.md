@@ -1,5 +1,3 @@
-QuickStay Hotel Booking Platform
-Description
 QuickStay is a modern, full-stack hotel booking and management platform built on the MERN stack (MongoDB, Express.js, React, Node.js). It provides a seamless booking experience for users and a powerful dashboard for hotel owners to manage their properties. The platform features secure user authentication and payment processing through Stripe.
 
 Features
