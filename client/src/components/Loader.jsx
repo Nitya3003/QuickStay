@@ -1,18 +1,34 @@
 import React, { useEffect } from 'react'
 import { useAppContext } from '../context/AppContext.jsx'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 
 const Loader = () => {
-    const { navigate } = useAppContext()
+    const { navigate, axios } = useAppContext()
     const { nextUrl } = useParams()
+    const location = useLocation()
 
     useEffect(() => {
-        if (nextUrl) {
-            setTimeout(() => {
+        const params = new URLSearchParams(location.search)
+        const sessionId = params.get('session_id')
+
+        const confirmPayment = async () => {
+            try {
+                if (sessionId) {
+                    await axios.post('/api/bookings/stripe-payment/confirm', { session_id: sessionId })
+                }
+            } catch (error) {
+                toast.error(error.message)
+            } finally {
+                // Navigate regardless, so the page refreshes bookings
                 navigate(`/${nextUrl}`)
-            }, 8000)
+            }
         }
-    }, [nextUrl])
+
+        if (nextUrl) {
+            confirmPayment()
+        }
+    }, [nextUrl, location.search])
 
     return (
         <div className='flex justify-center items-center h-screen'>

@@ -36,7 +36,7 @@ export const stripeWebhooks = async (request, response) => {
             paymentMethod: "Stripe"
         });
     } else {
-        console.log("Unhandled event type: ",event.type);
+        console.log("Unhandled event type: ", event.type);
     }
     response.json({ received: true });
 };
